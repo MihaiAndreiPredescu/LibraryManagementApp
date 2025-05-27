@@ -1,0 +1,11 @@
+﻿@model LibraryManagementApp.Models.Book
+
+<div class="container">
+    <h2>Delete Book</h2>
+    <p>Are you sure you want to delete "@Model.Title" by @Model.Author?</p>
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit">Yes, Delete</button>
+        <a asp-action="Index">No, Cancel</a>
+    </form>
+</div>

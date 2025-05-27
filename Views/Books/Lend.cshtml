@@ -1,0 +1,14 @@
+﻿@model LibraryManagementApp.Models.Book
+
+<div class="container">
+    <h2>Lend Book</h2>
+    <form asp-action="Lend" method="post">
+        <input type="hidden" name="bookId" value="@ViewBag.BookId" />
+        <div class="form-group">
+            <label for="borrower">Borrower</label>
+            <input name="borrower" id="borrower" class="form-control" required />
+        </div>
+        <button type="submit">Lend Book</button>
+        <a asp-action="Index">Cancel</a>
+    </form>
+</div>

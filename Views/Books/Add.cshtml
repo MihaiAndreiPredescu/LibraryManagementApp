@@ -1,0 +1,43 @@
+﻿@model LibraryManagementApp.Models.Book
+
+<div class="container">
+    <h2>Add Book</h2>
+    <form asp-action="Add" method="post">
+        <div class="form-group">
+            <label>Title</label>
+            <input asp-for="Title" class="form-control" required />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Author</label>
+            <input asp-for="Author" class="form-control" required />
+            <span asp-validation-for="Author" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Pages</label>
+            <input asp-for="Pages" type="number" class="form-control" min="1" required />
+            <span asp-validation-for="Pages" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Genre</label>
+            <select asp-for="Genre" class="form-control" required>
+                <option value="">Select a genre</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Non-Fiction">Non-Fiction</option>
+                <option value="Science">Science</option>
+                <option value="History">History</option>
+				<option value="Fantasy">Fantasy</option>
+				<option value="Mystery">Mystery</option>
+				<option value="Romance">Romance</option>
+				<option value="Thriller">Thriller</option>
+				<option value="Biography">Biography</option>
+				<option value="Self-Help">Self-Help</option>
+				<option value="Children">Children</option>
+
+            </select>
+            <span asp-validation-for="Genre" class="text-danger"></span>
+        </div>
+        <button type="submit">Add Book</button>
+        <a asp-action="Index">Cancel</a>
+    </form>
+</div>

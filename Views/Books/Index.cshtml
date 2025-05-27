@@ -1,0 +1,68 @@
+﻿@model LibraryManagementApp.Models.BookFilterViewModel
+
+<div class="container">
+    <h2>Book List</h2>
+    <button class="action-button add-button"><a asp-action="Add">Add New Book</a></button>
+    <!-- Filter Form -->
+    <form asp-action="Index" method="get" class="filter-form">
+        <div class="form-group">
+            <label for="genreFilter">Filter by Genre:</label>
+            <select id="genreFilter" name="genreFilter" class="form-control" onchange="this.form.submit()">
+                <option value="" selected="@(string.IsNullOrEmpty(Model.GenreFilter) ? "selected" : null)">All Genres</option>
+                @foreach (var genre in Model.Genres)
+                {
+                    <option value="@genre" selected="@(Model.GenreFilter == genre ? "selected" : null)">@genre</option>
+                }
+            </select>
+        </div>
+        <span class="filter-label">Last Filter: @Model.LastAppliedFilter</span>
+    </form>
+
+    <!-- Book List -->
+    <table>
+        <tr><th>Title</th><th>Author</th><th>Pages</th><th>Genre</th><th>Actions</th></tr>
+        @if (Model.Books.Any())
+        {
+            @foreach (var book in Model.Books)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Pages</td>
+                    <td>@book.Genre</td>
+                    <td>
+                        <button class="action-button edit-button">
+                            <a asp-action="Edit" asp-route-id="@book.Id">Edit</a>
+                        </button>
+                        <button class="action-button delete-button">
+                            <a asp-action="Delete" asp-route-id="@book.Id">Delete</a>
+                        </button>
+                        <button class="action-button lend-button">
+                            <a asp-action="Lend" asp-route-id="@book.Id">Lend</a>
+                        </button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="5">No books found.</td></tr>
+        }
+    </table>
+
+    <!-- Pagination Controls -->
+    @if (Model.TotalPages > 1)
+    {
+        <div class="pagination">
+            <a asp-action="Index" asp-route-genreFilter="@Model.GenreFilter" asp-route-page="@(Model.CurrentPage - 1)" 
+               class="page-link @(Model.CurrentPage == 1 ? "disabled" : "")">Previous</a>
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <a asp-action="Index" asp-route-genreFilter="@Model.GenreFilter" asp-route-page="@i" 
+                   class="page-link @(Model.CurrentPage == i ? "active" : "")">@i</a>
+            }
+            <a asp-action="Index" asp-route-genreFilter="@Model.GenreFilter" asp-route-page="@(Model.CurrentPage + 1)" 
+               class="page-link @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">Next</a>
+        </div>
+    }
+</div>

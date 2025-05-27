@@ -1,0 +1,11 @@
+﻿@model LibraryManagementApp.Models.LentBook
+
+<div class="container">
+    <h2>Return Book</h2>
+    <p>Are you sure you want to return "@Model.Book.Title" lent to @Model.Borrower?</p>
+    <form asp-action="ReturnConfirmed" asp-controller="LentBooks" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit">Yes, Return</button>
+        <a asp-action="Index" asp-controller="LentBooks">No, Cancel</a>
+    </form>
+</div>

@@ -1,0 +1,23 @@
+﻿@model List<LibraryManagementApp.Models.LentBook>
+
+<div class="container">
+    <h2>Lent Books</h2>
+    <table>
+        <tr><th>Title</th><th>Author</th><th>Borrower</th><th>Lend Date</th><th>Actions</th></tr>
+        @foreach (var lentBook in Model)
+        {
+            <tr>
+                <td>@lentBook.Book.Title</td>
+                <td>@lentBook.Book.Author</td>
+                <td>@lentBook.Borrower</td>
+                <td>@lentBook.LendDate.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <button class="action-button return-button">
+                        <a asp-action="Return" asp-controller="LentBooks" asp-route-id="@lentBook.Id">Return</a>
+                    </button>
+                </td>
+            </tr>
+        }
+    </table>
+    <a asp-action="Index" asp-controller="Books">Back to Book List</a>
+</div>
